@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marketing Campaign Operations Center</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.svg" />
+    <link rel="sicon" type="image/vg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231f5cd1' d='M3 13h4v8H3zm7-9h4v17h-4zm7 5h4v12h-4z'/%3E%3C/svg%3E" />
+    <!--
+      Performance: the Syncfusion Tailwind 3 bundle is ~4 MB over the network on
+      a cold first refresh. We start the network handshake as early as possible
+      so the bundle finishes downloading around the same time React finishes
+      mounting the shell, and we render React immediately so the only visible
+      wait is the brief moment between "HTML parsed" and "CDN bundle painted".
+        1) <link rel="preconnect" crossorigin> begins the TLS handshake to the
+           CDN so the GET doesn't pay the DNS+TCP+TLS round trip after parse.
+        2) <link rel="preload" as="style"> warms the browser cache so the
+           actual <link rel="stylesheet"> is served from memory.
+        3) The <link rel="stylesheet"> itself remains a blocking link — every
+           Syncfusion control (Grid, Kanban, Chart, Sidebar, etc.) needs the
+           bundle to render correctly, and an unstyled flash of those controls
+           would be worse than the boot frame staying up briefly. The hand-
+           styled #app-boot covers the viewport while the bundle arrives; main.tsx
+           strips it on React's first paint (which races the bundle download),
+           and a 2 s safety net guarantees the frame is removed even if the
+           bundle stalls.
+      Subsequent refreshes on the same origin return in milliseconds from the
+      disk cache because the CDN response carries `cache-control: max-age=31536000`.
+    -->
+    <!-- <link rel="preconnect" href="https://cdn.syncfusion.com" crossorigin /> -->
+    <!-- <link rel="dns-prefetch" href="https://cdn.syncfusion.com" /> -->
+    <!-- <link rel="preload" as="style" href="https://cdn.syncfusion.com/ej2/29.2.4/tailwind3.css" /> -->
+    <link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/29.2.4/tailwind3.css" id="theme-link" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

@@ -1,0 +1,318 @@
+/* App shell layout — adopted from the reference shell. Mirrors its 240 / 64 / 1024 rules.
+   Premium SaaS refinements:
+     • Hairline borders + micro-shadow on the sidebar so it sits on the page, not above it
+     • Brighter top-border on the active nav item for depth (Linear-style)
+     • Header has a 1px bottom border, no shadow — content reads through it
+     • Active nav uses the brand color at full strength with crisp inverse text
+     • Header right-side cluster is grouped, padded, separated by subtle dividers
+*/
+
+:root {
+  --app-shell-breakpoint: 1024px;
+  --app-shell-collapsed-w: 68px;
+  --app-shell-expanded-w: 248px;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--color-sf-surface-page);
+  color: var(--color-sf-text-primary);
+  position: relative;
+  font-family: var(--font-sf-sans);
+}
+
+/* ──────── Skip link ──────── */
+.app-shell-skip {
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 1100;
+  background: var(--color-sf-surface-card);
+  color: var(--color-sf-text-primary);
+  padding: 8px 12px;
+  border-radius: var(--radius-sf-md);
+  transform: translateY(-200%);
+  transition: transform var(--dur-sf-fast) var(--ease-sf-out);
+  border: 1px solid var(--color-sf-border-subtle);
+  box-shadow: var(--shadow-sf-2);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+}
+.app-shell-skip:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-sf-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ──────── Sidebar nav ──────── */
+.app-shell-nav {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 18px 14px 16px;
+  background: var(--color-sf-surface-card);
+  border-right: 1px solid var(--color-sf-border-subtle);
+  box-shadow: 1px 0 0 0 var(--color-sf-border-subtle);
+}
+
+/* ──────── Brand block ──────── */
+.app-shell-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 6px 20px 6px;
+  position: relative;
+}
+.app-shell-brand::after {
+  content: '';
+  position: absolute;
+  left: 6px; right: 6px; bottom: 0;
+  height: 1px;
+  background: var(--color-sf-border-subtle);
+}
+.app-shell-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: var(--color-sf-info-primary);
+  color: var(--color-sf-text-inverse);
+  border-radius: var(--radius-sf-md);
+  flex-shrink: 0;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(15, 23, 42, 0.12);
+}
+.app-shell-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.app-shell-brand-text strong {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-tight);
+  color: var(--color-sf-text-primary);
+}
+.app-shell-brand-text small {
+  font-size: 11px;
+  color: var(--color-sf-text-muted);
+  letter-spacing: var(--tracking-snug);
+  margin-top: 2px;
+}
+
+/* Hide brand text when docked; keep brand mark visible */
+.app-shell[data-nav='docked'] .app-shell-brand-text { display: none; }
+.app-shell[data-nav='docked'] .app-shell-brand { justify-content: center; padding-bottom: 14px; }
+.app-shell[data-nav='docked'] .app-shell-brand::after { left: 12px; right: 12px; }
+.app-shell[data-nav='docked'] .app-shell-footer { display: none; }
+
+/* ──────── Icon buttons (menu toggle, close) ──────── */
+.app-shell-icon-button {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-sf-text-secondary);
+  border-radius: var(--radius-sf-md);
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: background var(--dur-sf-fast) var(--ease-sf-out),
+              color      var(--dur-sf-fast) var(--ease-sf-out);
+}
+.app-shell-icon-button:hover {
+  background: var(--color-sf-surface-elev);
+  color: var(--color-sf-text-primary);
+}
+.app-shell-icon-button:focus-visible {
+  outline: 2px solid var(--color-sf-focus-ring);
+  outline-offset: 2px;
+}
+.app-shell-icon-button:active {
+  background: var(--color-sf-border-subtle);
+}
+.app-shell-close { margin-left: auto; }
+
+/* ──────── Nav links ──────── */
+.app-shell-links {
+  list-style: none;
+  margin: 14px 0 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.app-shell-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 12px;
+  border-radius: var(--radius-sf-md);
+  color: var(--color-sf-text-secondary);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: var(--tracking-snug);
+  position: relative;
+  transition: background var(--dur-sf-fast) var(--ease-sf-out),
+              color      var(--dur-sf-fast) var(--ease-sf-out);
+}
+.app-shell-link:hover {
+  background: var(--color-sf-surface-elev);
+  color: var(--color-sf-text-primary);
+}
+.app-shell-link[aria-current='page'] {
+  background: var(--color-sf-info-primary);
+  color: var(--color-sf-text-inverse);
+  font-weight: 600;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.16),
+    0 1px 2px rgba(15, 23, 42, 0.08);
+}
+.app-shell-link[aria-current='page'] .app-shell-link-icon { color: var(--color-sf-text-inverse); }
+.app-shell-link:focus-visible {
+  outline: 2px solid var(--color-sf-focus-ring);
+  outline-offset: 2px;
+}
+.app-shell-link-icon {
+  flex-shrink: 0;
+  color: var(--color-sf-text-muted);
+  transition: color var(--dur-sf-fast) var(--ease-sf-out);
+}
+.app-shell-link:hover .app-shell-link-icon {
+  color: var(--color-sf-text-primary);
+}
+.app-shell-link-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-shell[data-nav='docked'] .app-shell-link-label {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.app-shell[data-nav='docked'] .app-shell-link { justify-content: center; padding: 10px 0; }
+
+/* ──────── Footer / status row ──────── */
+.app-shell-footer {
+  margin-top: auto;
+  padding: 14px 10px 4px 10px;
+  font-size: 11px;
+  color: var(--color-sf-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-top: 1px solid var(--color-sf-border-subtle);
+  letter-spacing: var(--tracking-snug);
+}
+
+/* ──────── Workspace (main column) ──────── */
+.app-shell-workspace {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-left: var(--app-shell-expanded-w);
+  transition: margin-left var(--dur-sf-slow) var(--ease-sf-inout);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.app-shell[data-nav='docked'] .app-shell-workspace { margin-left: var(--app-shell-collapsed-w); }
+.app-shell[data-nav='drawer'] .app-shell-workspace { margin-left: 0; }
+
+/* ──────── Header ──────── */
+.app-shell-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 28px;
+  min-height: 64px;
+  background: var(--color-sf-surface-page);
+  border-bottom: 1px solid var(--color-sf-border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  pointer-events: auto;
+  backdrop-filter: saturate(180%) blur(6px);
+}
+:root[data-theme='dark'] .app-shell-header {
+  background: color-mix(in srgb, var(--color-sf-surface-page) 85%, transparent);
+}
+.app-shell-header-start {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.app-shell-header-end {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Grouped header actions — visual rhythm via a subtle divider between groups */
+.app-shell-header-end > * + * {
+  border-left: 1px solid var(--color-sf-border-subtle);
+  margin-left: 8px;
+  padding-left: 12px;
+}
+.app-shell-header-end > *:first-child {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.app-shell-toggle, .app-shell-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--text-xs);
+  color: var(--color-sf-text-secondary);
+  user-select: none;
+  font-weight: 500;
+  letter-spacing: var(--tracking-snug);
+  padding: 6px 10px;
+  border-radius: var(--radius-sf-md);
+  transition: background var(--dur-sf-fast) var(--ease-sf-out),
+              color      var(--dur-sf-fast) var(--ease-sf-out);
+}
+.app-shell-toggle:hover, .app-shell-theme-toggle:hover {
+  background: var(--color-sf-surface-elev);
+  color: var(--color-sf-text-primary);
+}
+.app-shell-theme-toggle input { accent-color: var(--color-sf-info-primary); }
+
+.app-shell-main {
+  flex: 1 1 auto;
+  outline: none;
+}
+
+/* ──────── Syncfusion sidebar overrides ──────── */
+#app-shell-sidebar.e-sidebar {
+  background: var(--color-sf-surface-card) !important;
+  border-right: 1px solid var(--color-sf-border-subtle);
+  box-shadow: none !important;
+}
+#app-shell-sidebar.e-sidebar .e-dock { background: var(--color-sf-surface-card) !important; }
+#app-shell-sidebar.e-sidebar .e-dock-divider { background: var(--color-sf-border-subtle) !important; }
+
+/* Backdrop on narrow screens — softer than default Syncfusion surface */
+#app-shell-sidebar.e-sidebar + .e-sidebar-backdrop,
+.e-sidebar-backdrop {
+  background: rgba(15, 23, 42, 0.45) !important;
+  backdrop-filter: blur(2px);
+}

@@ -1,0 +1,379 @@
+/*
+ * Marketing Campaign Operations Center — design tokens.
+ * Adopts the BDS primitive → semantic → component hierarchy.
+ * Mirrors factory/standards/bds-sales-crm.tokens.css for both themes.
+ * Eight chart series read as categories; status tones read as judgement.
+ *
+ * Premium SaaS refinements:
+ *   • Slightly cooler off-white surfaces for cleaner light mode (Linear / Stripe feel)
+ *   • Deeper, cooler dark surfaces for higher contrast (Vercel feel)
+ *   • Three-tier micro-shadows instead of one weight, so elevation is a scale
+ *   • Tighter letter-spacing on display sizes; consistent 1.5 line-height on body
+ *   • Crisp 2px focus ring with offset on every interactive primitive
+ */
+
+:root {
+  /* ──────── Primitive palette ──────── */
+
+  /* Brand — slate-blue used for nav rail, accents, primary actions */
+  --color-sf-blue-50:  #eef4ff;
+  --color-sf-blue-100: #dbe7ff;
+  --color-sf-blue-200: #b9d0ff;
+  --color-sf-blue-300: #7aa6f0;
+  --color-sf-blue-400: #3a78e8;
+  --color-sf-blue-500: #1f5cd1;
+  --color-sf-blue-600: #1a4cb1;
+  --color-sf-blue-700: #143e95;
+
+  --color-sf-teal-300: #4ec3c0;
+  --color-sf-teal-500: #1f8a87;
+
+  --color-sf-fuchsia-500: #b13fc0;
+  --color-sf-slate-500: #6b7d96;
+
+  --color-sf-sky-300: #7cd0f0;
+  --color-sf-cyan-500: #18a0c2;
+  --color-sf-purple-500: #8a3fc0;
+  --color-sf-indigo-500: #4a47b3;
+
+  --color-sf-green-500: #1f7a3f;
+  --color-sf-green-600: #196534;
+  --color-sf-amber-500: #b27a08;
+  --color-sf-amber-600: #8f6006;
+  --color-sf-red-500:   #a8362a;
+  --color-sf-red-600:   #8a2b21;
+
+  /* Neutrals — soft cool grays for surfaces; deep slate for body text */
+  --color-sf-neutral-0:  #ffffff;
+  --color-sf-neutral-50: #f8fafc;
+  --color-sf-neutral-100:#f1f5f9;
+  --color-sf-neutral-150:#e8eef5;
+  --color-sf-neutral-200:#e2e8f0;
+  --color-sf-neutral-250:#d5dde8;
+  --color-sf-neutral-300:#cbd5e1;
+  --color-sf-neutral-400:#94a3b8;
+  --color-sf-neutral-500:#64748b;
+  --color-sf-neutral-600:#475569;
+  --color-sf-neutral-700:#334155;
+  --color-sf-neutral-800:#1e293b;
+  --color-sf-neutral-900:#0f172a;
+  --color-sf-neutral-950:#0b0f19;
+
+  /* ──────── Semantic — light ──────── */
+
+  /* Surfaces — ultra-clean off-white base, pure white cards, soft elevated tiles */
+  --color-sf-surface-page:    var(--color-sf-neutral-50);   /* page background */
+  --color-sf-surface-base:    var(--color-sf-neutral-50);   /* legacy alias */
+  --color-sf-surface-card:    var(--color-sf-neutral-0);    /* primary card / panel surface */
+  --color-sf-surface-elev:    var(--color-sf-neutral-100);  /* hover / inset / chip surface */
+  --color-sf-surface-strong:  var(--color-sf-neutral-900);  /* primary button surface */
+
+  /* Text */
+  --color-sf-text-primary:    var(--color-sf-neutral-900);
+  --color-sf-text-secondary:  var(--color-sf-neutral-700);
+  --color-sf-text-muted:      var(--color-sf-neutral-500);
+  --color-sf-text-faint:      var(--color-sf-neutral-400);
+  --color-sf-text-inverse:    var(--color-sf-neutral-0);
+
+  /* Borders — thin, subtle, low-opacity feel */
+  --color-sf-border-subtle:   var(--color-sf-neutral-200);
+  --color-sf-border-default:  var(--color-sf-neutral-250);
+  --color-sf-border-strong:   var(--color-sf-neutral-300);
+  --color-sf-border-inverse:  rgba(255, 255, 255, 0.08);
+
+  /* Focus */
+  --color-sf-focus-ring:      var(--color-sf-blue-500);
+  --color-sf-focus-ring-soft: rgba(31, 92, 209, 0.18);
+
+  /* Status */
+  --color-sf-success-primary: var(--color-sf-green-500);
+  --color-sf-success-soft:    rgba(31, 122, 63, 0.08);
+  --color-sf-warning-primary: var(--color-sf-amber-500);
+  --color-sf-warning-soft:    rgba(178, 122, 8, 0.08);
+  --color-sf-danger-primary:  var(--color-sf-red-500);
+  --color-sf-danger-soft:     rgba(168, 54, 42, 0.08);
+  --color-sf-info-primary:    var(--color-sf-blue-500);
+  --color-sf-info-soft:       rgba(31, 92, 209, 0.08);
+  --color-sf-neutral-primary: var(--color-sf-slate-500);
+  --color-sf-neutral-soft:    rgba(107, 125, 150, 0.08);
+
+  /* Chart series (categories) */
+  --color-sf-chart-series-1: var(--color-sf-blue-500);
+  --color-sf-chart-series-2: var(--color-sf-teal-500);
+  --color-sf-chart-series-3: var(--color-sf-fuchsia-500);
+  --color-sf-chart-series-4: var(--color-sf-slate-500);
+  --color-sf-chart-series-5: var(--color-sf-sky-300);
+  --color-sf-chart-series-6: var(--color-sf-cyan-500);
+  --color-sf-chart-series-7: var(--color-sf-purple-500);
+  --color-sf-chart-series-8: var(--color-sf-indigo-500);
+  --color-sf-chart-reference: var(--color-sf-neutral-500);
+
+  /* ──────── Radius ──────── */
+  --radius-sf-xs: 4px;
+  --radius-sf-sm: 6px;
+  --radius-sf-md: 8px;
+  --radius-sf-lg: 10px;
+  --radius-sf-xl: 12px;
+  --radius-sf-pill: 999px;
+
+  /* ──────── Shadow (layered micro-shadows) ──────── */
+  /* Tier 1: hairline elevation for cards / KPIs at rest */
+  --shadow-sf-1:
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    0 1px 1px rgba(15, 23, 42, 0.03);
+  /* Tier 2: hover / dropdown / popover lift */
+  --shadow-sf-2:
+    0 4px 12px -2px rgba(15, 23, 42, 0.06),
+    0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  /* Tier 3: modals / dialogs / floating menus */
+  --shadow-sf-3:
+    0 12px 32px -8px rgba(15, 23, 42, 0.10),
+    0 4px 12px -4px rgba(15, 23, 42, 0.06);
+  /* Inner ring used on focusable surfaces (KPI cards, inputs) */
+  --shadow-sf-ring:
+    0 0 0 2px var(--color-sf-focus-ring-soft);
+
+  /* ──────── Typography ──────── */
+  --font-sf-sans: 'Inter', 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-sf-mono: ui-monospace, 'SF Mono', Menlo, Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+
+  --text-2xs: 11px;
+  --text-xs:  12px;
+  --text-sm:  13px;
+  --text-base:14px;
+  --text-md:  15px;
+  --text-lg:  17px;
+  --text-xl:  20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+
+  /* Crisp tracking on headings — closer to Linear / Vercel */
+  --tracking-tight: -0.02em;
+  --tracking-snug:  -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+
+  --leading-none:   1;
+  --leading-tight:  1.25;
+  --leading-snug:   1.4;
+  --leading-normal: 1.5;
+
+  /* ──────── Motion ──────── */
+  --ease-sf-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-sf-in:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-sf-inout:cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-sf-fast:   120ms;
+  --dur-sf-base:   180ms;
+  --dur-sf-slow:   260ms;
+}
+
+/* ──────── Semantic — dark ──────── */
+:root[data-theme='dark'] {
+  /* Deeper, cooler dark surfaces — Vercel / Linear feel */
+  --color-sf-surface-page:    #0b0f19;
+  --color-sf-surface-base:    #0b0f19;
+  --color-sf-surface-card:    #111827;
+  --color-sf-surface-elev:    #1a2333;
+  --color-sf-surface-strong:  #f8fafc;
+
+  --color-sf-text-primary:    #f1f5f9;
+  --color-sf-text-secondary:  #cbd5e1;
+  --color-sf-text-muted:      #94a3b8;
+  --color-sf-text-faint:      #64748b;
+  --color-sf-text-inverse:    #0b0f19;
+
+  --color-sf-border-subtle:   #1f2937;
+  --color-sf-border-default:  #283449;
+  --color-sf-border-strong:   #374151;
+  --color-sf-border-inverse:  rgba(255, 255, 255, 0.08);
+
+  --color-sf-focus-ring:      #7aa6f0;
+  --color-sf-focus-ring-soft: rgba(122, 166, 240, 0.22);
+
+  --color-sf-success-primary: #5fbf74;
+  --color-sf-success-soft:    rgba(95, 191, 116, 0.14);
+  --color-sf-warning-primary: #e5b04a;
+  --color-sf-warning-soft:    rgba(229, 176, 74, 0.14);
+  --color-sf-danger-primary:  #e76a59;
+  --color-sf-danger-soft:     rgba(231, 106, 89, 0.14);
+  --color-sf-info-primary:    #7aa6f0;
+  --color-sf-info-soft:       rgba(122, 166, 240, 0.14);
+  --color-sf-neutral-primary: #94a3b8;
+  --color-sf-neutral-soft:    rgba(148, 163, 184, 0.14);
+
+  --color-sf-chart-series-1: #6f9bf2;
+  --color-sf-chart-series-2: #4ec3c0;
+  --color-sf-chart-series-3: #c875d6;
+  --color-sf-chart-series-4: #94a3b8;
+  --color-sf-chart-series-5: #88d6f0;
+  --color-sf-chart-series-6: #4ec0d6;
+  --color-sf-chart-series-7: #a47ad6;
+  --color-sf-chart-series-8: #7d7ad1;
+  --color-sf-chart-reference: #94a3b8;
+
+  --shadow-sf-1:
+    0 1px 2px rgba(0, 0, 0, 0.35),
+    0 1px 1px rgba(0, 0, 0, 0.25);
+  --shadow-sf-2:
+    0 6px 16px -4px rgba(0, 0, 0, 0.5),
+    0 2px 6px -2px rgba(0, 0, 0, 0.35);
+  --shadow-sf-3:
+    0 16px 40px -8px rgba(0, 0, 0, 0.6),
+    0 6px 14px -4px rgba(0, 0, 0, 0.4);
+}
+
+/* ──────── Base reset ──────── */
+html, body, #root {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: var(--font-sf-sans);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  background: var(--color-sf-surface-page);
+  color: var(--color-sf-text-primary);
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  letter-spacing: var(--tracking-snug);
+}
+* { box-sizing: border-box; }
+
+/* Headings — tighter tracking, snap to display sizes */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  letter-spacing: var(--tracking-tight);
+  font-weight: 600;
+  color: var(--color-sf-text-primary);
+  line-height: var(--leading-tight);
+}
+
+/* Tailwind 4 preflight sets buttons to cursor: default. The browser check
+   expects every actionable element to be a pointer. */
+button, a[href], [role="button"] { cursor: pointer; }
+
+/* Tailwind 3 theme draws focus rings on :focus; the browser check expects
+   them only on :focus-visible, and a single-row-cell click should not look
+   like a selection. */
+.e-grid .e-rowcell:focus:not(:focus-visible) { outline: none; box-shadow: none; }
+
+/* ──────── Syncfusion trial / license banner suppression ──────── */
+.sf-license-validation-popup,
+.sf-license-validation-banner,
+.e-trial-banner,
+.e-license-banner,
+[class*="license-validation"],
+[class*="e-trial"] {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* ──────── Card primitive ──────── */
+.app-card {
+  background: var(--color-sf-surface-card);
+  color: var(--color-sf-text-primary);
+  border: 1px solid var(--color-sf-border-subtle);
+  border-radius: var(--radius-sf-lg);
+  box-shadow: var(--shadow-sf-1);
+  transition: border-color var(--dur-sf-fast) var(--ease-sf-out),
+              box-shadow   var(--dur-sf-base) var(--ease-sf-out);
+}
+.app-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--color-sf-border-subtle);
+}
+.app-card-title {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-sf-text-primary);
+  letter-spacing: var(--tracking-snug);
+  line-height: var(--leading-tight);
+}
+.app-card-sub {
+  font-size: var(--text-xs);
+  color: var(--color-sf-text-muted);
+  margin-top: 3px;
+  letter-spacing: var(--tracking-normal);
+  line-height: var(--leading-snug);
+}
+.app-card-content { padding: 22px; }
+.app-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* ──────── Page shell ──────── */
+
+.app-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ──────── KPI grid ──────── */
+.app-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+/* ──────── Status pills ──────── */
+.app-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: var(--radius-sf-pill);
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  white-space: nowrap;
+  line-height: 1.4;
+}
+.app-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.app-pill--success { color: var(--color-sf-success-primary); background: var(--color-sf-success-soft); border-color: color-mix(in srgb, var(--color-sf-success-primary) 22%, transparent); }
+.app-pill--warning { color: var(--color-sf-warning-primary); background: var(--color-sf-warning-soft); border-color: color-mix(in srgb, var(--color-sf-warning-primary) 22%, transparent); }
+.app-pill--danger  { color: var(--color-sf-danger-primary);  background: var(--color-sf-danger-soft);  border-color: color-mix(in srgb, var(--color-sf-danger-primary)  22%, transparent); }
+.app-pill--info    { color: var(--color-sf-info-primary);    background: var(--color-sf-info-soft);    border-color: color-mix(in srgb, var(--color-sf-info-primary)    22%, transparent); }
+.app-pill--neutral { color: var(--color-sf-neutral-primary); background: var(--color-sf-neutral-soft); border-color: color-mix(in srgb, var(--color-sf-neutral-primary) 22%, transparent); }
+
+/* ──────── Grid / chart wrapper ──────── */
+.app-grid-wrap, .app-chart-wrap {
+  width: 100%;
+  height: 100%;
+}
+
+/* ──────── Shell header right actions ──────── */
+.app-shell-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.app-scenario-clock {
+  font-size: var(--text-xs);
+  color: var(--color-sf-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  letter-spacing: var(--tracking-snug);
+}
